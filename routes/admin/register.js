@@ -11,7 +11,7 @@ router.post('/register',function(req,res,next){
 	dbUser.isRegister({username:req.body,password:req.body.password}).then((err,data)=>{
 		console.log(err,data);
 	})
-	req.session.user=req.body;
+	// req.session.user=req.body;
 	// res.redirect('/article');
 })
 

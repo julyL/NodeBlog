@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 
 //创建一个schema实例
 var UserSchema = new Schema({
-    username: String,
-    password: String
+    username: {type:"String"},
+    password: {type:"String"}
 });
 
 //利用UserSchema实例,发布一个User的model并且导出
@@ -14,7 +14,7 @@ var User = mongoose.model("User", UserSchema);
 
 var dbUser = {
     isRegister(data){
-        return User.findOne({username:data.username});
+        return User.findOne({username:data.username,password:data.password});
     },
     insert(data) {
         var user = new User({
