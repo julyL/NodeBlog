@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>register</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src='/javascripts/vue-ajax-promise.js'></script>
+    <link rel='stylesheet' href='/javascripts/style.css' />
+  </head>
+  <body>
+  <h2>注册</h2>
+    <div>user: <input type="text" class='user'></div>
+    <div>pass: <input type="text" class='pass'></div>
+    <div><button class='submit'>submit</button></div>
+    <script>
+    	 $(".submit").on('click',function(){
+            var user=$(".user").val();
+            var pass=$(".pass").val();
+            $.post('/admin/register', {
+                username:user,
+                password:pass
+            }, function(data, textStatus, xhr) {
+              console.log(data);
+            }); 
+       });
+
+    </script>
+  </body>
+</html>

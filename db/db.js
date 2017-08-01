@@ -1,17 +1,14 @@
-/**
- * Created by vince on 2017/7/10.
- * db.js
- */
+
 var mongoose = require('mongoose');
-//设置mongo存储路径
-var DB_URL = 'mongodb://localhost:27017/mongoosetest';
+mongoose.Promise = require('bluebird');
+var mongodbConfig = require('../mongodbConfig');
 
 //连接数据库
-mongoose.connect(DB_URL);
+mongoose.connect(mongodbConfig.url);
 
 //连接成功后输出语句
 mongoose.connection.on('connected',function () {
-    console.log('Mongoose connect ' + DB_URL + " success");
+    console.log('Mongoose connect ' + mongodbConfig.url + " success");
 });
 
 //连接异常现实错误原因

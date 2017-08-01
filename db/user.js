@@ -1,7 +1,3 @@
-/**
- * Created by vince on 2017/7/10.  
- * user.js
- */
 //引入之前我们创建的mongose对象
 var mongoose = require('./db.js');
 //创建一个schema对象
@@ -9,11 +5,30 @@ var Schema = mongoose.Schema;
 
 //创建一个schema实例
 var UserSchema = new Schema({
-    username: {type: String},
-    userpwd: {type: String},
-    userage: {type: Number},
-    logindate: {type: Date}
+    username: String,
+    password: String
 });
 
 //利用UserSchema实例,发布一个User的model并且导出
-module.exports = mongoose.model("User",UserSchema);
+var User = mongoose.model("User", UserSchema);
+
+var dbUser = {
+    isRegister(data){
+        return User.findOne({username:data.username});
+    },
+    insert(data) {
+        var user = new User({
+            username: data.username,
+            password: data.password
+        })
+        user.save((err, res) => {
+            if (err) {
+                console.log("Error: " + err);
+            } else {
+                console.log("Success Res: " + res)
+            }
+        })
+    },
+}
+
+module.exports=dbUser;
