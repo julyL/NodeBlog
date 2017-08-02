@@ -19,7 +19,11 @@
                 username:user,
                 password:pass
             }, function(data, textStatus, xhr) {
-              console.log(data);
+                if(data.code==0){
+                   location.href='./list';
+                }else if(data.code==1000){
+                   alert(data.data.msg)
+                }
             }); 
        });
 

@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/article:id', function(req, res, next) {
-  	res.render('./admin/article');
+router.get('/list', function(req, res, next) {
+  	res.render('./admin/list');
 })
 
 router.post('/list',function(req,res,next){

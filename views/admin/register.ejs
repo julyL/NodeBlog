@@ -7,7 +7,7 @@
     <link rel='stylesheet' href='/javascripts/style.css' />
   </head>
   <body>
-  <h2>注册</h2>
+    <h2>注册</h2>
     <div>user: <input type="text" class='user'></div>
     <div>pass: <input type="text" class='pass'></div>
     <div><button class='submit'>submit</button></div>
@@ -19,7 +19,11 @@
                 username:user,
                 password:pass
             }, function(data, textStatus, xhr) {
-              console.log(data);
+                if(data.code==0){
+                   location.href='./list';
+                }else if(data.code==1000){
+                   alert(data.data.msg)
+                }
             }); 
        });
 

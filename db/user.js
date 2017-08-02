@@ -10,25 +10,24 @@ var UserSchema = new Schema({
 });
 
 //利用UserSchema实例,发布一个User的model并且导出
-var User = mongoose.model("User", UserSchema);
+var UserModel = mongoose.model("User", UserSchema);
 
 var dbUser = {
-    isRegister(data){
-        return User.findOne({username:data.username,password:data.password});
+    isAccountExist(data){
+        return UserModel.findOne(data);
     },
     insert(data) {
-        var user = new User({
+        var user = new UserModel({
             username: data.username,
             password: data.password
         })
-        user.save((err, res) => {
-            if (err) {
-                console.log("Error: " + err);
-            } else {
-                console.log("Success Res: " + res)
-            }
-        })
+        return user.save();
     },
 }
+
+// dbUser.insert({
+//     username:'libo',
+//     password:'123'
+// });
 
 module.exports=dbUser;
