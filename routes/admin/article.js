@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
-
+var dbArticle = require('../../db/article.js');
 
 router.get('/article:id', function(req, res, next) {
   	res.render('./admin/article');
 })
 
-router.post('/list',function(req,res,next){
-	console.log(req.body);
-	req.session.user=req.body;
-	res.redirect('/list');
+router.post('/article/add',function(req,res,next){
+		dbArticle.insert(req.body).then(()=>{
+			res.json({code:0});
+		})
 })
 
 module.exports = router;

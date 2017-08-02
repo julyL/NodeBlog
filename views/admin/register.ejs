@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>register</title>
+    <title>login</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src='/javascripts/vue-ajax-promise.js'></script>
     <link rel='stylesheet' href='/javascripts/style.css' />
   </head>
+  <style>
+    .input-w{
+        width: 310px;
+        margin: 10px 0;
+    }
+    .input-w input{
+      -webkit-appearance: none;
+      border-bottom: 1px solid #666;
+    }
+    label{
+      width: 60px;
+      display: inline-block;
+    }
+    button{
+      border: 1px solid #333;
+    }
+  </style>
   <body>
-    <h2>注册</h2>
-    <div>user: <input type="text" class='user'></div>
-    <div>pass: <input type="text" class='pass'></div>
+    <h2>register</h2>
+    <div class='input-w'>
+      <label for="user">user: </label>
+      <input type="text" class='user' name="user">
+    </div>
+    <div class='input-w'>
+      <label for="pass">pass: </label>
+      <input type="text" class='pass' name='pass'>
+    </div>
     <div><button class='submit'>submit</button></div>
     <script>
     	 $(".submit").on('click',function(){
@@ -20,7 +43,7 @@
                 password:pass
             }, function(data, textStatus, xhr) {
                 if(data.code==0){
-                   location.href='./list';
+                   location.href='/';
                 }else if(data.code==1000){
                    alert(data.data.msg)
                 }

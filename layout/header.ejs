@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>>
+  </head>
   <body>
-   <div id="header"></div
+   <div id="header">
+      <div class="head-nav">
+         <%if(user){%>
+         <a href="/admin/write">write</a>
+          <%}else{%>
+             <a href="/admin/login">login</a>
+          <%}%>
+      </div>
+   		<div class="home-head">
+   			<img class="user-avatar" src='https://avatars3.githubusercontent.com/u/12106591?v=4&s=460'>
+   			<div class="user-word">但行好事,莫问前程</div>
+   		</div>
+   </div>
    <div id="container">
