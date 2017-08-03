@@ -2,11 +2,9 @@
 	<div id="article-list">
 	<%for(var i=0;i<list.length;i++){%>
 	<div class='article-w'>
-		<div class="article-time"><%=list[i].date%></div>
-		<h3 class="article-title"><%=list[i].title%></h3>
-		<div class="artilce-intr">
-			<a href=""><%=list[i].intr%></a>
-		</div>
+		<div class="article-time"><%=list[i].time%></div>
+		<h3 class="article-title"><a href="/article/<%= list[i]._id %>"><%=list[i].title%></a></h3>
+		<div class="artilce-intr"><%=list[i].intr%></div>
 	</div>
 	 <%}%>
 	 </div>

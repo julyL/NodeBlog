@@ -1,6 +1,8 @@
+*{
+  box-sizing: border-box;
+}
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  box-sizing: border-box;
 }
 input,textarea{
 	outline: none;
@@ -46,6 +48,10 @@ a {
     font-weight: 600;
     margin: 0;
     color: rgba(0,0,0,.98);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 60%;
 }
 .artilce-intr{
     font-family: Droid Serif,Times New Roman,PingFang SC,Hiragino Sans GB,Droid Sans Fallback,Microsoft YaHei,serif;
@@ -53,17 +59,21 @@ a {
         margin-top: .42em;
     line-height: 1.42;
 }
-.artilce-intr a{
+.artilce-intr{
 	 color: rgba(0,0,0,.68);
-	
 }
 .head-nav{
 	  padding: 20px 40px;
 	  margin: 0 auto;
-	  width: 1000px;
+	  max-width: 1000px;
 	  overflow: hidden;
 }
 .head-nav a{
-	float: right;
-	color: #333;
+    float: right;
+    margin-left: 30px;
+    color: rgba(0,0,0,.42);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .02em;
+    text-transform: uppercase;
 }

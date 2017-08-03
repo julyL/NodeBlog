@@ -8,11 +8,6 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var mongodbConfig = require('./mongodbConfig');
 
-var routerPage = {
-    admin: require('./routes/admin/index'),   //后台界面
-    index: require('./routes/index')
-}
-
 var app = express();
 
 // view engine setup
@@ -38,9 +33,18 @@ app.use(session({ //session持久化配置
     })
 }));
 
+var routerPage = {
+    admin: require('./routes/admin/index'),   //后台界面
+    index: require('./routes/index'),
+    article: require('./routes/article')
+}
 
 app.use('/', routerPage.index);
+app.use('/', routerPage.article);
 app.use('/admin', routerPage.admin);
+app.use((req,res)=>{
+    res.send("Not Found");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

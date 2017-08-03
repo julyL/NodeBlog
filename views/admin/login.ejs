@@ -3,7 +3,7 @@
   <head>
     <title>login</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src='/javascripts/vue-ajax-promise.js'></script>
+    <script src='/javascripts/jquery.js'></script>
     <link rel='stylesheet' href='/javascripts/style.css' />
   </head>
   <style>
@@ -14,6 +14,8 @@
     .input-w input{
       -webkit-appearance: none;
       border-bottom: 1px solid #666;
+      width: 100px;
+      text-align: center;
     }
     label{
       width: 60px;
@@ -21,6 +23,7 @@
     }
     button{
       border: 1px solid #333;
+      background: none;
     }
   </style>
   <body>
@@ -42,9 +45,7 @@
                 username:user,
                 password:pass
             }, function(data, textStatus, xhr) {
-                if(data.code==0){
-                   location.href='./list';
-                }else if(data.code==1000){
+                if(data.code==1000){
                    alert(data.data.msg)
                 }
             }); 

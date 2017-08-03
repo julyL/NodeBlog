@@ -15,7 +15,7 @@ router.post('/login',function(req,res,next){
     dbUser.isAccountExist(dbdata).then((dbres)=>{
     	if(dbres){
     		req.session.user=dbdata;
-    		res.json({code:0})
+    		res.redirect("/");
     	}else{
     		res.json({code:1000,
     			data:{

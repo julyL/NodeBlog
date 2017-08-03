@@ -2,7 +2,7 @@
 <html>
   <body>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-   <script src='/javascripts/vue-ajax-promise.js'></script>
+   <script src='/javascripts/jquery.js'></script>
   <style>
   	#container{
 	    width: 80%;
@@ -14,7 +14,7 @@
 	    overflow: auto;
 	    box-sizing: border-box;
 	    height: 500px;
-	    	   	box-shadow: 1px 4px 5px #ccc;
+	    box-shadow: 1px 4px 5px #ccc;
 	    border: 1px solid #ccc;
   	}
   	#write{
@@ -78,7 +78,7 @@
                 data: {
                     content:preview.innerHTML,
                     title:$("#title").val(),
-                    date:new Date()
+                    date:+new Date()
                 },
                 success: function(data) {
                     var d = data.data;

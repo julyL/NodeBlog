@@ -25,15 +25,19 @@ var dbArticle = {
         })
         return article.save();
     },
+    remove(data){
+
+    },
     getlist(){
-        return ArticleModel.find({},function(data){
-            console.log(data)
-        })
+        return ArticleModel.find({})
+    },
+    getArticle(data){
+         return ArticleModel.findOne(data);
     }
 }
 
-ArticleModel.find(null,function(data){
-            console.log(data)
-        })
+ // ArticleModel.findOne({date:1501726522287}).then((data)=>{
+ //        console.log(data)
+ // });
 
 module.exports=dbArticle;

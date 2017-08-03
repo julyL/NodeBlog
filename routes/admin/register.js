@@ -24,7 +24,7 @@ router.post('/register', function(req, res, next) {
         }else{
         	dbUser.insert(dbdata).then((dbres)=>{
         		 req.session.user=dbdata;
-        		 res.json({code:0});
+        		 res.redirect("/")
         	})
         }
     })

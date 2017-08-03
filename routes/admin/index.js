@@ -2,8 +2,8 @@ var express = require('express');
 var routerPage = {
     login: require('./login'),   
     register: require('./register'),   
-    write: require('./write')
-    // list: require('./list'),
+    write: require('./write'),
+    list: require('./list'),
 }
 var router = express.Router();
 

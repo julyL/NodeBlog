@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>article</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
   <body>
-    <h1>Article</h1>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/markdown.js"></script>
+  <style>
+    #article-tit{
+      margin: 100px auto 30px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    #article{
+      width: 800px;
+      height: 600px;
+      padding: 10px 30px;
+      margin: 0 auto 100px;
+    }
+    .hidden{
+      display: none;
+    }
+  </style>
+  <div id="article-tit"><%=title%></div>
+  <div id="article"><%-content%></div> 
   </body>
 </html>
