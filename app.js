@@ -43,7 +43,12 @@ app.use('/', routerPage.index);
 app.use('/', routerPage.article);
 app.use('/admin', routerPage.admin);
 app.use((req,res)=>{
-    res.send("Not Found");
+    res.render('error',{
+        user:req.session.user,
+        error:{
+            message:'Not Found'
+        }
+    });
 });
 
 // catch 404 and forward to error handler

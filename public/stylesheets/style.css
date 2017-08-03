@@ -52,6 +52,7 @@ a {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 60%;
+    display:block;
 }
 .artilce-intr{
     font-family: Droid Serif,Times New Roman,PingFang SC,Hiragino Sans GB,Droid Sans Fallback,Microsoft YaHei,serif;
@@ -63,7 +64,7 @@ a {
 	 color: rgba(0,0,0,.68);
 }
 .head-nav{
-	  padding: 20px 40px;
+	  padding: 20px 40px 50px;
 	  margin: 0 auto;
 	  max-width: 1000px;
 	  overflow: hidden;

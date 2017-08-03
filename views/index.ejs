@@ -1,11 +1,18 @@
 <% include ../layout/header.ejs %>
+   <div class="home-head">
+   			<img class="user-avatar" src='https://avatars3.githubusercontent.com/u/12106591?v=4&s=460'>
+   			<div class="user-word">但行好事,莫问前程</div>
+   		</div>
+   </div>
+   <div id="container">
 	<div id="article-list">
 	<%for(var i=0;i<list.length;i++){%>
 	<div class='article-w'>
 		<div class="article-time"><%=list[i].time%></div>
-		<h3 class="article-title"><a href="/article/<%= list[i]._id %>"><%=list[i].title%></a></h3>
+		<a href="/article/<%= list[i]._id %>" class="article-title"><%=list[i].title%></a>
 		<div class="artilce-intr"><%=list[i].intr%></div>
 	</div>
 	 <%}%>
+	 </div>
 	 </div>
 <% include ../layout/footer.ejs %>

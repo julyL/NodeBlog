@@ -4,6 +4,7 @@ var routerPage = {
     register: require('./register'),   
     write: require('./write'),
     list: require('./list'),
+    article: require('./article'),
 }
 var router = express.Router();
 

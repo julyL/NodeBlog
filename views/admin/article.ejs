@@ -1,25 +1,104 @@
-<!DOCTYPE html>
-<html>
-  <body>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+<% include ../../layout/header.ejs %>
    <script src='/javascripts/jquery.js'></script>
+   <script src="/javascripts/markdown.js"></script>
   <style>
-  	#article-tit{
-  		margin: 100px auto;
-  		text-align: center;
-  		font-size: 16px;
-  		font-weight: 400;
-  	}
-  	#article{
-  		width: 800px;
-  		height: 600px;
-  		margin: 0 auto 100px;
-  	}
+    #container{
+      width: 80%;
+      height: 600px;
+      position:absolute;
+      left:0;
+      top: -100px;
+      bottom:0;
+      right:0;
+      margin:auto;
+
+    }
+    #editor{
+      overflow: auto;
+      box-sizing: border-box;
+      height: 500px;
+      box-shadow: 1px 4px 5px #ccc;
+      border: 1px solid #ccc;
+    }
+    #write{
+    float: left;
+    width: 50%;
+    height: 100%;
+    outline: none;
+    padding: 25px 10px;
+    border-right: 1px solid #ccc;
+    }
+    #preview{
+      padding: 10px;
+      width: 50%;
+      height: 100%;
+      outline: none;
+      float: right;
+    }
+  .input-w{
+    margin: 20px auto 80px;
+    display: block;
+    text-align: center;
+  }
+  #title{
+    border-bottom: 1px solid #ccc;
+    width: 100px;
+    text-align: center;
+  }
+  label{
+    margin: 0 10px 0 -60px;
+  }
+  #sub{
+    margin-top: 30px;
+    float: right;
+    cursor: pointer;
+  }
   </style>
-  	<div id="article-tit"><%=title%></div>
-	<div id="article">
-		<%= markdown.toHTML(content)%>
-	</div>
+    <div id="container">
+      <div class="input-w">
+        <label for="title">Title:</label><input type="text" id="title" name='title' value="<%= data.title%>">
+      </div>
+      <div id="editor">
+      <textarea id="write" oninput="this.editor.update()"><%= data.content%></textarea>
+      <div id="preview"></div>
+      </div>
+       <div id="sub">save</div>
+    </div>
+    <script>
+      function Editor(input, preview) {
+        this.update = function () {
+          preview.innerHTML = markdown.toHTML(input.value);
+        };
+        input.editor = this;
+        this.update();
+      }
+      new Editor($("#write")[0], $("#preview")[0]);
+      $("#sub").on("click",function(){
+            $.ajax({
+                url: "/admin/article/update",
+                type:"post",
+                dataType: "json",
+                data: {
+                    content:$("#write")[0].value,
+                    title:$("#title").val(),
+                    date:+new Date(),
+                    html:$("#preview")[0].innerHTML,
+                    articleId:location.href.split("/admin/article/")[1]
+                },
+                success: function(data) {
+                    var d = data.data;
+                    if(data.code==0){
+                       location.href='/admin/list';
+                    }else{
+                       alert("出错啦");
+                    }
+                },
+                error:function(){
+            
+                }
+            })
+          
+      })
     </script>
   </body>
 </html>

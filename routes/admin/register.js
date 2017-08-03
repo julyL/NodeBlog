@@ -5,7 +5,9 @@ var checkLogin = require('../../middleware/checkStatus.js').checkLogin;
 
 router.get('/register', checkLogin);
 router.get('/register', function(req, res, next) {
-    res.render('./admin/register');
+    res.render('./admin/register',{
+        user:req.session.user
+    });
 })
 
 router.post('/register', function(req, res, next) {
@@ -24,7 +26,9 @@ router.post('/register', function(req, res, next) {
         }else{
         	dbUser.insert(dbdata).then((dbres)=>{
         		 req.session.user=dbdata;
-        		 res.redirect("/")
+        		  res.json({
+                         code:0
+                  })
         	})
         }
     })

@@ -1,33 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>login</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<% include ../../layout/header.ejs %>
     <script src='/javascripts/jquery.js'></script>
-    <link rel='stylesheet' href='/javascripts/style.css' />
   </head>
   <style>
     .input-w{
-        width: 310px;
+        width: 240px;
         margin: 10px 0;
     }
     .input-w input{
       -webkit-appearance: none;
-      border-bottom: 1px solid #666;
-      width: 100px;
+      border: 1px solid #ccc;
+      width: 200px;
+      line-height: 26px;
       text-align: center;
     }
     label{
-      width: 60px;
+      width: 35px;
       display: inline-block;
     }
-    button{
-      border: 1px solid #333;
-      background: none;
+    .btn{
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .btn,.link{
+        margin-top: 30px;
+        width: 48%;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
+    .form{
+       width: 250px;
+       margin: 30px auto;
     }
   </style>
   <body>
-    <h2>Login</h2>
+    <div class="form">
     <div class='input-w'>
       <label for="user">user: </label>
       <input type="text" class='user' name="user">
@@ -36,18 +43,27 @@
       <label for="pass">pass: </label>
       <input type="text" class='pass' name='pass'>
     </div>
-    <div><button class='submit'>submit</button></div>
+    <span class='btn'>Login</span>
+    <a href="/admin/register" class='link'>go register</a>
+    </div>
     <script>
-    	 $(".submit").on('click',function(){
+    	 $(".btn").on('click',function(){
             var user=$(".user").val();
             var pass=$(".pass").val();
-            $.post('/admin/login', {
+            $.ajax({
+              url:"/admin/login",
+              type:'post',
+              data:{
                 username:user,
                 password:pass
-            }, function(data, textStatus, xhr) {
+              },
+              dataType:"json",
+              success:function(data){
+                 data.code==0&&(location.href='/');
                 if(data.code==1000){
                    alert(data.data.msg)
                 }
+              }
             }); 
        });
 

@@ -1,3 +1,8 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% include ../layout/header.ejs %>
+<style>
+	.error{
+	font-size:30px;
+	text-align:center;
+	}
+ </style>
+<div class="error"><%= error.message%></div>

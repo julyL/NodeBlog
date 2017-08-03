@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <body>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+<% include ../../layout/header.ejs %>
    <script src='/javascripts/jquery.js'></script>
+   <script src="../javascripts/markdown.js"></script>
   <style>
   	#container{
 	    width: 80%;
 	    height: 600px;
-	    margin: 50px auto 100px;
+	    position:absolute;
+      left:0;
+      top: -100px;
+      bottom:0;
+      right:0;
+      margin:auto;
 
   	}
   	#editor{
@@ -19,20 +22,21 @@
   	}
   	#write{
 		float: left;
-		width: 47%;
+		width: 50%;
 		height: 100%;
 		outline: none;
-		padding: 10px;
+		padding: 25px 10px;
 		border-right: 1px solid #ccc;
   	}
   	#preview{
-  		width: 47%;
+      padding: 10px;
+  		width: 50%;
   		height: 100%;
   		outline: none;
 		  float: right;
   	}
 	.input-w{
-		margin: 20px auto ;
+		margin: 20px auto 80px;
 		display: block;
 		text-align: center;
 	}
@@ -60,7 +64,6 @@
     	</div>
    		 <div id="sub">save</div>
     </div>
-    <script src="../javascripts/markdown.js"></script>
     <script>
       function Editor(input, preview) {
         this.update = function () {
@@ -76,7 +79,8 @@
                 type:"post",
                 dataType: "json",
                 data: {
-                    content:preview.innerHTML,
+                    content:$("#write")[0].value,
+                    html:$("#preview")[0].innerHTML ,
                     title:$("#title").val(),
                     date:+new Date()
                 },

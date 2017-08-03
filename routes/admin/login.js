@@ -5,7 +5,9 @@ var checkLogin = require('../../middleware/checkStatus.js').checkLogin;
 
 router.get('/login', checkLogin);
 router.get('/login', function(req, res, next) {
-  	res.render('./admin/login');
+  	res.render('./admin/login',{
+        user:req.session.user
+    });
 })
 router.post('/login',function(req,res,next){
 	var dbdata={
@@ -15,7 +17,9 @@ router.post('/login',function(req,res,next){
     dbUser.isAccountExist(dbdata).then((dbres)=>{
     	if(dbres){
     		req.session.user=dbdata;
-    		res.redirect("/");
+    		res.json({
+                code:0
+            })
     	}else{
     		res.json({code:1000,
     			data:{

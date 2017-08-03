@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <body>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/javascripts/markdown.js"></script>
+<% include ../layout/header.ejs %>
+  <script src="/javascripts/markdown.js"></script>
   <style>
     #article-tit{
       margin: 100px auto 30px;
@@ -20,7 +17,7 @@
       display: none;
     }
   </style>
-  <div id="article-tit"><%=title%></div>
-  <div id="article"><%-content%></div> 
+  <div id="article-tit"><%=data.title%></div>
+  <div id="article"><%-data.html%></div> 
   </body>
 </html>
