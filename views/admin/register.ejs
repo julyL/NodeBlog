@@ -1,71 +1,78 @@
 <% include ../../layout/header.ejs %>
-    <script src='/javascripts/jquery.js'></script>
+  <script src='/javascripts/jquery.js'></script>
   <style>
-    .input-w{
-        width: 240px;
-        margin: 10px 0;
+    .input-w {
+      width: 240px;
+      margin: 10px 0;
     }
-    .input-w input{
+
+    .input-w input {
       -webkit-appearance: none;
       border: 1px solid #ccc;
       width: 200px;
       line-height: 26px;
       text-align: center;
     }
-    label{
+
+    label {
       width: 35px;
       display: inline-block;
     }
-    .btn{
+
+    .btn {
       font-size: 16px;
       font-weight: bold;
     }
-    .btn,.link{
-        margin-top: 30px;
-        width: 48%;
-        display: inline-block;
-        text-align: center;
-        cursor: pointer;
+
+    .btn,
+    .link {
+      margin-top: 30px;
+      width: 48%;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
     }
-    .form{
-       width: 250px;
-       margin: 30px auto;
+
+    .form {
+      width: 250px;
+      margin: 30px auto;
     }
   </style>
+
   <body>
     <div class="form">
-    <div class='input-w'>
-      <label for="user">user: </label>
-      <input type="text" class='user' name="user">
+      <div class='input-w'>
+        <label for="user">user: </label>
+        <input type="text" class='user' name="user">
+      </div>
+      <div class='input-w'>
+        <label for="pass">pass: </label>
+        <input type="text" class='pass' name='pass'>
+      </div>
+      <span class='btn'>register</span>
+      <a href="/admin/register">go login</a>
     </div>
-    <div class='input-w'>
-      <label for="pass">pass: </label>
-      <input type="text" class='pass' name='pass'>
-    </div>
-    <span class='btn'>register</span>
-    <a href="/admin/register">go login</a>
-     </div>
     <script>
-    	 $(".btn").on('click',function(){
-            var user=$(".user").val();
-            var pass=$(".pass").val();
-            $.ajax({
-              url:"/admin/register",
-              type:'post',
-              data:{
-                username:user,
-                password:pass
-              },
-              dataType:"json",
-              success:function(data){
-                data.code==0&&(location.href='/');
-                if(data.code==1000){
-                   alert(data.data.msg)
-                }
-              }
-            }); 
-       });
-
+      $(".btn").on('click', function () {
+        var user = $(".user").val();
+        var pass = $(".pass").val();
+        $.ajax({
+          url: "/api/register",
+          type: 'post',
+          data: {
+            username: user,
+            password: pass
+          },
+          dataType: "json",
+          success: function (data) {
+            data.code == 0 && (location.href = '/');
+            if (data.code == 1000) {
+              alert(data.data.msg)
+            }
+          }
+        });
+      });
     </script>
   </body>
-</html>
+
+  </html>

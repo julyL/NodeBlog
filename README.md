@@ -1,6 +1,7 @@
 # blog
 
 ### 启动本地服务
+git clone 
 cd NodeBlog
 npm i
 

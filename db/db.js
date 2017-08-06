@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
+mongoose.Promise = require('bluebird');    //使用bluebird作为mongoose的Promise库 (这样可以使用then方法,而不是callback)
 var mongodbConfig = require('../mongodbConfig');
 
 //连接数据库

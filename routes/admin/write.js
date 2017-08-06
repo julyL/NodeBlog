@@ -2,22 +2,10 @@ var express = require('express');
 var router = express.Router();
 var dbArticle = require('../../db/article.js');
 
-router.get('/write', function(req, res, next) {
-  	res.render('./admin/write',{
-			user:req.session.user,
-		});
-})
-
-router.post('/write',function(req,res,next){
-	var data={
-        content:req.body.content,
-        title:req.body.title,
-        date:req.body.date,
-        html:req.body.html
-	}
-	dbArticle.insert(data).then(()=>{
-		res.json({code:0});
-	})
+router.get('/write', function (req, res, next) {
+	res.render('./admin/write', {
+		user: req.session.user,
+	});
 })
 
 module.exports = router;

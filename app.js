@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var mongodbConfig = require('./mongodbConfig');
-
+var apiRouter = require('./api/index');
 var app = express();
+var accessControl = require('./middleware/accessControl.js').accessControl;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +29,7 @@ app.use(session({ //session持久化配置
     cookie: { maxAge: 1000 * 100 * 60 }, //超时时间
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({
+    store: new MongoStore({    //使用数据库存储session
         url: mongodbConfig.url
     })
 }));
@@ -38,28 +39,24 @@ var routerPage = {
     index: require('./routes/index'),
     article: require('./routes/article')
 }
-
+app.use('/',accessControl);
 app.use('/', routerPage.index);
 app.use('/', routerPage.article);
 app.use('/admin', routerPage.admin);
-app.use((req,res)=>{
-    res.render('error',{
-        user:req.session.user,
-        error:{
-            message:'Not Found'
+
+app.use('/',apiRouter);
+app.use((req, res, next) => {         // catch 404 and forward to error handler
+    res.render('error', {
+        user: req.session.user,
+        error: {
+            message: 'Not Found'
         }
     });
 });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

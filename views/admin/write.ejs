@@ -1,103 +1,110 @@
 <% include ../../layout/header.ejs %>
-   <script src='/javascripts/jquery.js'></script>
-   <script src="../javascripts/markdown.js"></script>
-  <style>
-  	#container{
-	    width: 80%;
-	    height: 600px;
-	    position:absolute;
-      left:0;
-      top: -100px;
-      bottom:0;
-      right:0;
-      margin:auto;
+	<script src="../javascripts/markdown.js"></script>
+	<style>
+		#container {
+			width: 80%;
+			height: 600px;
+			position: absolute;
+			left: 0;
+			top: -100px;
+			bottom: 0;
+			right: 0;
+			margin: auto;
+		}
 
-  	}
-  	#editor{
-	    overflow: auto;
-	    box-sizing: border-box;
-	    height: 500px;
-	    box-shadow: 1px 4px 5px #ccc;
-	    border: 1px solid #ccc;
-  	}
-  	#write{
-		float: left;
-		width: 50%;
-		height: 100%;
-		outline: none;
-		padding: 25px 10px;
-		border-right: 1px solid #ccc;
-  	}
-  	#preview{
-      padding: 10px;
-  		width: 50%;
-  		height: 100%;
-  		outline: none;
-		  float: right;
-  	}
-	.input-w{
-		margin: 20px auto 80px;
-		display: block;
-		text-align: center;
-	}
-	#title{
-		border-bottom: 1px solid #ccc;
-		width: 100px;
-    text-align: center;
-	}
-	label{
-		margin: 0 10px 0 -60px;
-	}
-	#sub{
-		margin-top: 30px;
-		float: right;
-		cursor: pointer;
-	}
-  </style>
-  	<div id="container">
-  		<div class="input-w">
-  			<label for="title">Title:</label><input type="text" id="title" name='title'>
-  		</div>
-  		<div id="editor">
-    	<textarea id="write" oninput="this.editor.update()">write here..</textarea>
-    	<div id="preview"></div>
-    	</div>
-   		 <div id="sub">save</div>
-    </div>
-    <script>
-      function Editor(input, preview) {
-        this.update = function () {
-          preview.innerHTML = markdown.toHTML(input.value);
-        };
-        input.editor = this;
-        this.update();
-      }
-      new Editor($("#write")[0], $("#preview")[0]);
-      $("#sub").on("click",function(){
-            $.ajax({
-                url: "/admin/write",
-                type:"post",
-                dataType: "json",
-                data: {
-                    content:$("#write")[0].value,
-                    html:$("#preview")[0].innerHTML ,
-                    title:$("#title").val(),
-                    date:+new Date()
-                },
-                success: function(data) {
-                    var d = data.data;
-                    if(data.code==0){
-                       location.href='/';
-                    }else{
-                       alert("出错啦");
-                    }
-                },
-                error:function(){
-            
-                }
-            })
-          
-      })
-    </script>
-  </body>
-</html>
+		#editor {
+			overflow: auto;
+			box-sizing: border-box;
+			height: 500px;
+			box-shadow: 1px 4px 5px #ccc;
+			border: 1px solid #ccc;
+		}
+
+		#write {
+			float: left;
+			width: 50%;
+			height: 100%;
+			outline: none;
+			padding: 25px 10px;
+			border-right: 1px solid #ccc;
+			line-height: 1.6;
+		}
+
+		#preview {
+			padding: 10px;
+			width: 50%;
+			height: 100%;
+			outline: none;
+			float: right;
+		}
+
+		.input-w {
+			margin: 20px auto 80px;
+			display: block;
+			text-align: center;
+		}
+
+		#title {
+			border-bottom: 1px solid #ccc;
+			width: 100px;
+			text-align: center;
+		}
+
+		label {
+			margin: 0 10px 0 -60px;
+		}
+
+		#sub {
+			margin-top: 30px;
+			float: right;
+			cursor: pointer;
+		}
+	</style>
+	<div id="container">
+		<div class="input-w">
+			<label for="title">Title:</label><input type="text" id="title" name='title'>
+		</div>
+		<div id="editor">
+			<textarea id="write" oninput="this.editor.update()">write here..</textarea>
+			<div id="preview"></div>
+		</div>
+		<div id="sub">save</div>
+	</div>
+	<script>
+		function Editor(input, preview) {
+			this.update = function () {
+				preview.innerHTML = markdown.toHTML(input.value);
+			};
+			input.editor = this;
+			this.update();
+		}
+		new Editor($("#write")[0], $("#preview")[0]);
+		$("#sub").on("click", function () {
+			$.ajax({
+				url: "/api/write",
+				type: "post",
+				dataType: "json",
+				data: {
+					content: $("#write")[0].value,
+					html: $("#preview")[0].innerHTML,
+					title: $("#title").val(),
+					date: +new Date()
+				},
+				success: function (data) {
+					var d = data.data;
+					if (data.code == 0) {
+						location.href = '/admin/list';
+					} else if (data.code == 1000) {
+						alert(data.data.msg)
+					}
+				},
+				error: function () {
+
+				}
+			})
+
+		})
+	</script>
+	</body>
+
+	</html>

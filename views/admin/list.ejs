@@ -1,76 +1,87 @@
 <% include ../../layout/header.ejs %>
   <script src='/javascripts/jquery.js'></script>
   <style>
-  	.article-w{
+    .article-w {
       position: relative;
-  		padding: 20px 40px;
+      padding: 20px 40px;
       width: 680px;
       border: 1px solid transparent;
       transition: all .5s;
       cursor: pointer;
       box-shadow: 2px 3px 4px #fff;
-  	}
-  	.article-w:hover {
-  		box-shadow: 2px 3px 4px #ccc;
-    	border: 1px solid #ede6e6;
-  	}
-    .delete{
+    }
+
+    .article-w:hover {
+      box-shadow: 2px 3px 4px #ccc;
+      border: 1px solid #ede6e6;
+    }
+
+    .delete {
       display: none;
       font-size: 16px;
     }
-    .article-w:hover .delete{
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 0;
-        cursor: pointer;
-        width: 100px;
-        text-align: center;
-        line-height: 70px;
-        font-size: 40px;
+
+    .article-w:hover .delete {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      width: 100px;
+      text-align: center;
+      line-height: 70px;
+      font-size: 40px;
     }
-    .delete:hover{
+
+    .delete:hover {
       color: #47c68c;
     }
   </style>
-	<div id="article-list">
-		<%for(var i=0;i<list.length;i++){%>
-		<div class='article-w' data-id="<%=list[i]._id%>">
-			<div class="article-time"><%=list[i].time%></div>
-			<h3 class="article-title"><%=list[i].title%></h3>
-			<div class="artilce-intr"><%=list[i].intr%></div>
-      <div class="delete">&times;</div>
-		</div>
-		 <%}%>
-	</div>
-	<script>
-      $(".delete").on('click',function(){
-          var is=confirm("是否删除这篇文章");
-          var self=this;
-          if(is){
-             $.ajax({
-                 url: "/admin/article/remove",
-                 type:"post",
-                 dataType: "json",
-                 data: {
-                    articleId:$(this).parent(".article-w").attr("data-id")
-                 },
-                 success: function(data) {
-                     var d = data.data;
-                     if(data.code==0){
-                       $(self).parent(".article-w").remove();
-                     }else if(data.code==1000){
-                        alert(data.data.msg);
-                     }
-                 }
-             })
+  <div id="article-list">
+    <%for(var i=0;i<list.length;i++){%>
+      <div class='article-w' data-id="<%=list[i]._id%>">
+        <div class="article-time">
+          <%=list[i].time%>
+        </div>
+        <h3 class="article-title">
+          <%=list[i].title%>
+        </h3>
+        <div class="artilce-intr">
+          <%=list[i].intr%>
+        </div>
+        <div class="delete">&times;</div>
+      </div>
+      <%}%>
+  </div>
+  <script>
+    $(".delete").on('click', function () {
+      var is = confirm("是否删除这篇文章");
+      var self = this;
+      if (is) {
+        $.ajax({
+          url: "/api/article/remove",
+          type: "post",
+          dataType: "json",
+          data: {
+            articleId: $(this).parent(".article-w").attr("data-id")
+          },
+          success: function (data) {
+            var d = data.data;
+            if (data.code == 0) {
+              $(self).parent(".article-w").remove();
+            } else if (data.code == 1000) {
+              alert(data.data.msg);
+            }
           }
-          return false;
-      });
-      $(".article-w").on('click',function(){
-          var id=$(this).attr("data-id");
-          location.href='/admin/article/'+id;
-      })
-	</script>
+        })
+      }
+      return false;
+    });
+    $(".article-w").on('click', function () {
+      var id = $(this).attr("data-id");
+      location.href = '/admin/article/' + id;
+    })
+  </script>
   </body>
-</html>
+
+  </html>
